@@ -7,10 +7,10 @@ namespace Portfoliowebsite.Services
     {
         public async Task SendAsync(string Name, string Email, string Subject, string Message)
         {
-            var smtp = new SmtpClient("smtp.mailtrap.io", 2525)
+            var smtp = new SmtpClient("sandbox.smtp.mailtrap.io", 2525)
             {
-                EnableSsl = false,
-                Credentials = new NetworkCredential("", "") // TODO: vervang met je eigen mailtrap credentials
+                Credentials = new NetworkCredential("2cecdf54e47e7c", "d112b12b0406e4"),
+                EnableSsl = true
             };
 
             var mail = new MailMessage();

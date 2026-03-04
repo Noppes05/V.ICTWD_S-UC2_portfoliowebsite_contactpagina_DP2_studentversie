@@ -32,7 +32,6 @@ input, textarea {
 .send-button {
     display: inline-block;
     padding: .75rem 1rem;
-    background: #dcdcdc;
     color: #f0f0f0;
     border-radius: 4px;
     cursor: pointer;
@@ -47,7 +46,3 @@ input, textarea {
     color: #a94442;
 }
 
-#liveStatus {
-    position: absolute;
-    left: -9999px;
-}

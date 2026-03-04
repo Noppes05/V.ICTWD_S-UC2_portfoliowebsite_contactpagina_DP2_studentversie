@@ -22,15 +22,27 @@ function setupValidation() {
     const echo = (id, value) => {
         document.getElementById(id).innerHTML = `\n <span>Probleem met: ${value}</span>\n `;
     };
+    const Noecho = (id, value) => {
+        document.getElementById(id).innerHTML = ``;
+    };
 
     [email, name, msg].forEach(el => {
         el.addEventListener('input', () => {
             if (el === email && !naiveEmailCheck(el.value)) {
                 echo('emailErr', el.value);
+            }
+            else if (el === email && naiveEmailCheck(el.value)) {
+                Noecho('emailErr', el.value);
+            
             } else if (el === name && el.value.length < 2) {
                 echo('nameErr', el.value);
+            } else if (el === name && el.value.length > 2) {
+                Noecho('nameErr', el.value);
             } else if (el === msg && el.value.length < 5) {
                 echo('msgErr', el.value);
+            }
+            else if (el === msg && el.value.length > 5) {
+                Noecho('msgErr', el.value);
             }
 
             status.textContent = 'Er is clientside validatie uitgevoerd';
@@ -38,6 +50,7 @@ function setupValidation() {
     });
 
     form.addEventListener('submit', (e) => {
+        console.log("submit clicked")
         if (hp.value) {
             e.preventDefault();
             alert('Spam gedetecteerd (client-side)!');
