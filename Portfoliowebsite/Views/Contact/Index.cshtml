@@ -32,6 +32,10 @@
         <span id="msgErr" asp-validation-for="Bericht" class="error"></span>
     </div>
     <div id="liveStatus"></div>
+    @if(TempData["ErrorMessage"] != null)
+    {
+        <div class="error">@TempData["ErrorMessage"]</div>
+    }
     <div class="btn-primary btn" role="button" tabindex="5" onclick="document.getElementById('contactForm').submit()">
         Versturen
     </div>
