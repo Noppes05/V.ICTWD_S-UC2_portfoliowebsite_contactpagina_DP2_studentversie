@@ -1,11 +1,5 @@
 ﻿window.addEventListener('contextmenu', e => e.preventDefault()); 
 
-window.addEventListener('keydown', e => {
-    if (e.key === 'Tab') {
-        e.preventDefault();
-    }
-});
-
 function naiveEmailCheck(email) {
     return /@/.test(email);
 }
@@ -14,16 +8,16 @@ function setupValidation() {
     const form = document.getElementById('contactForm');
     const hp = document.getElementById('website');
     const email = document.getElementById('Email');
-    const name = document.getElementById('Name');
-    const msg = document.getElementById('Message');
+    const name = document.getElementById('Naam');
+    const msg = document.getElementById('Bericht');
     const status = document.getElementById('liveStatus');
 
 
     const echo = (id, value) => {
-        document.getElementById(id).innerHTML = `\n <span>Probleem met: ${value}</span>\n `;
+        document.getElementById(id).innerText = `\n Probleem met: ${value}\n `;
     };
     const Noecho = (id, value) => {
-        document.getElementById(id).innerHTML = ``;
+        document.getElementById(id).innerText = ``;
     };
 
     [email, name, msg].forEach(el => {

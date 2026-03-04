@@ -1,7 +1,9 @@
-﻿namespace Portfoliowebsite.Services
+﻿using Portfoliowebsite.Models;
+
+namespace Portfoliowebsite.Services
 {
     public interface IEmailSender
     {
-        Task SendAsync(string Name, string Email, string Subject, string Message);
+        Task SendAsync(ContactFormulierViewModel model);
     }
 }

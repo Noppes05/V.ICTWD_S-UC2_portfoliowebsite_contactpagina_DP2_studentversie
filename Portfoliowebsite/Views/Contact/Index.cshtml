@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Portfoliowebsite.Models.ContactFormulierViewModel
+@{
     ViewData["Title"] = "Contact";
 }
 
@@ -11,26 +12,27 @@
         <input type="text" id="website" name="website" value="" />
     </div>
     <div>
-        <label for="Name">Je naam</label>
-        <input id="Name" name="Name" placeholder="Naam" tabindex="-1" />
-        <div id="nameErr" class="error"></div>
+        <label for="Naam">Je naam</label>
+        <input asp-for="Naam" id="Naam" name="Naam" placeholder="Naam" tabindex="1"/>
+        <span id="nameErr" asp-validation-for="Naam" class="error"></span>
     </div>
     <div>
         <label for="EmailX">E-mail</label>
-        <input id="Email" name="Email" placeholder="naam@domein.nl" />
-        <div id="emailErr" class="error"></div>
+        <input asp-for="Email" id="Email" name="Email" tabindex="2" placeholder="naam@domein.nl" />
+        <span id="emailErr" asp-validation-for="Email" class="error"></span>
     </div>
     <div>
-        <label for="Subject">Onderwerp</label>
-        <input id="Subject" name="Subject" placeholder="Onderwerp" />
+        <label for="Onderwerp">Onderwerp</label>
+        <input asp-for="Onderwerp" id="Onderwerp" name="Onderwerp" tabindex="3" placeholder="Onderwerp" />
+        <span asp-validation-for="Onderwerp" class="error"></span>
     </div>
     <div>
-        <label for="Message" aria-hidden="true">Bericht</label> 
-        <textarea id="Message" name="Message" rows="5" placeholder="Je bericht"></textarea>
-        <div id="msgErr" class="error"></div>
+        <label for="Bericht" aria-hidden="true">Bericht</label>
+        <textarea asp-for="Bericht" id="Bericht" name="Bericht" rows="5" tabindex="4" placeholder="Je bericht"></textarea>
+        <span id="msgErr" asp-validation-for="Bericht" class="error"></span>
     </div>
     <div id="liveStatus"></div>
-    <div class="btn-primary btn" role="button" onclick="document.getElementById('contactForm').submit()">
+    <div class="btn-primary btn" role="button" tabindex="5" onclick="document.getElementById('contactForm').submit()">
         Versturen
     </div>
 </form>

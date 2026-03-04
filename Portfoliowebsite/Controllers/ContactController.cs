@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Portfoliowebsite.Models;
 using Portfoliowebsite.Services;
 
 namespace Portfoliowebsite.Controllers
@@ -12,13 +13,16 @@ namespace Portfoliowebsite.Controllers
         public IActionResult Index() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Index(string Name, string Email, string Subject, string Message)
+        public async Task<IActionResult> Index(ContactFormulierViewModel model)
         {
-            await _email.SendAsync(Name, Email, Subject, Message);
+            if (!ModelState.IsValid) { 
+            return View(model);
+            }
+            await _email.SendAsync(model);
 
-            TempData["ThanksName"] = Name;
-            TempData["ThanksEmail"] = Email;
-            TempData["ThanksMessage"] = Message;
+            TempData["ThanksName"] = model.Naam;
+            TempData["ThanksEmail"] = model.Email;
+            TempData["ThanksMessage"] = model.Bericht;
 
             return RedirectToAction(nameof(Thanks));
         }
