@@ -17,7 +17,7 @@
         <span id="nameErr" asp-validation-for="Naam" class="error"></span>
     </div>
     <div>
-        <label for="EmailX">E-mail</label>
+        <label for="Email">E-mail</label>
         <input asp-for="Email" id="Email" name="Email" tabindex="2" placeholder="naam@domein.nl" />
         <span id="emailErr" asp-validation-for="Email" class="error"></span>
     </div>
@@ -27,7 +27,7 @@
         <span asp-validation-for="Onderwerp" class="error"></span>
     </div>
     <div>
-        <label for="Bericht" aria-hidden="true">Bericht</label>
+        <label for="Bericht">Bericht</label>
         <textarea asp-for="Bericht" id="Bericht" name="Bericht" rows="5" tabindex="4" placeholder="Je bericht"></textarea>
         <span id="msgErr" asp-validation-for="Bericht" class="error"></span>
     </div>
@@ -36,7 +36,6 @@
     {
         <div class="error">@TempData["ErrorMessage"]</div>
     }
-    <div class="btn-primary btn" role="button" tabindex="5" onclick="document.getElementById('contactForm').submit()">
-        Versturen
-    </div>
+    <input class="btn-primary btn" id="submit" type="submit" value="Versturen" tabindex="5"/>
+      
 </form>

@@ -11,13 +11,20 @@ function setupValidation() {
     const name = document.getElementById('Naam');
     const msg = document.getElementById('Bericht');
     const status = document.getElementById('liveStatus');
-
+    const submit = document.getElementById('submit');
+    const errors = { emailErr: false, nameErr: false, msgErr: false };
 
     const echo = (id, value) => {
-        document.getElementById(id).innerText = `\n Probleem met: ${value}\n `;
+        document.getElementById(id).innerText = `\n Probleem met: ${value}, invoer niet lang genoeg\n `;
+        errors[id] = true;
+        submit.disabled = true;
     };
     const Noecho = (id, value) => {
         document.getElementById(id).innerText = ``;
+        errors[id] = false;
+        if (Object.values(errors).every(v => !v)) {
+            submit.disabled = false;
+        }
     };
 
     [email, name, msg].forEach(el => {
@@ -38,8 +45,6 @@ function setupValidation() {
             else if (el === msg && el.value.length > 5) {
                 Noecho('msgErr', el.value);
             }
-
-            status.textContent = 'Er is clientside validatie uitgevoerd';
         });
     });
 
