@@ -9,6 +9,7 @@ namespace Portfoliowebsite.Controllers
     {
 
         private readonly IEmailSender _email;
+        private static readonly Dictionary<string, DateTime> _stored_ipAdresses = new Dictionary<string, DateTime>();
         public ContactController(IEmailSender email) => _email = email;
 
         public IActionResult Index() => View();
@@ -22,6 +23,18 @@ namespace Portfoliowebsite.Controllers
             {
                 return View(model);
             }
+
+            // Haal het IP-adres op van de bezoeker en check of er recentelijk al een bericht is verzonden vanaf dat IP-adres
+            var ipAdres = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "onbekend";
+            if (ipAdres != "onbekend" && _stored_ipAdresses.ContainsKey(ipAdres))
+            {
+                if ((DateTime.Now - _stored_ipAdresses[ipAdres]).TotalSeconds < 30)
+                {
+                    TempData["ErrorMessage"] = "U heeft recentelijk al een bericht verzonden. Probeer het later opnieuw.";
+                    return View(model);
+                }
+            }
+
 
             // Encodeer de invoer om XSS-aanvallen te voorkomen
             model.Naam = HtmlEncoder.Default.Encode(model.Naam);
@@ -40,6 +53,7 @@ namespace Portfoliowebsite.Controllers
             // Probeer het e-mailbericht te verzenden en handel eventuele fouten af
             try
             {
+                _stored_ipAdresses[ipAdres] = DateTime.Now;
                 await _email.SendAsync(model);
                 TempData["ThanksName"] = model.Naam;
                 TempData["ThanksEmail"] = model.Email;
